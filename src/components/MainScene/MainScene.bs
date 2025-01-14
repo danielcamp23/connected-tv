@@ -1,0 +1,35 @@
+import "pkg:/source/core/router.bs"
+
+sub init()
+
+
+    _bindComponents()
+
+    initRouter(m.screenStackNode, m.mainMenu)
+
+    m.mainMenu.setFocus(true)
+
+    m.tracker = m.top.createChild("TrackerTask")
+end sub
+
+sub _bindComponents()
+    m.screenStackNode = m.top.findNode("screenStackNode")
+    m.mainMenu = m.top.findNode("mainMenu")
+end sub
+
+function onKeyEvent(key as string, pressed as boolean) as boolean
+    handled = false
+    if not pressed then return handled
+
+    ?"onKeyEvent mainScene "key
+    if key = "back"
+        handled = m.router.goBackToPreviousSection()
+    else if key = "up"
+        if not m.mainMenu.isInFocusChain()
+            m.mainMenu.setFocus(true)
+            handled = true
+        end if
+    end if
+
+    return handled
+end function

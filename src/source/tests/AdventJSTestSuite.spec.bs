@@ -1,0 +1,42 @@
+import "pkg:/components/Views/DetailsScreen/DetailsScreen.bs"
+
+namespace Tests
+    @ignore
+    @suite("Advent of Code 2020")
+    class AdventTest extends CTVBaseTestSuite
+
+        @describe("This test suite is the first approach to the Advent of Code 2020, https://2021.adventjs.dev/challenges/23")
+
+        @it("This should return `false` the first argument is not a string")
+        function _()
+            m.assertFalse(canConfigure("{}", 2))
+            m.assertFalse(canConfigure(invalid, invalid))
+            m.assertFalse(canConfigure([], 2))
+        end function
+
+        @it("This should return false if the second argument is not a string")
+        function _()
+            m.assertFalse(canConfigure("", 2))
+        end function
+
+        @it("This should return false if any of the arguments is an empty string")
+        function _()
+            m.assertFalse(canConfigure("", ""))
+        end function
+
+        @it("This should return false if the strings don't have the same length")
+        function _()
+            m.assertFalse(canConfigure("{}", "{}{}"))
+        end function
+
+        @it("Should return false if the strings provided have different number of unique letters")
+        function _()
+            m.assertFalse(canConfigure("abc", "add"))
+        end function
+
+        @it("Shoudl return false if the order is not respected")
+        function _()
+            m.assertFalse(canConfigure("MMM", "MID"))
+        end function
+    end class
+end namespace

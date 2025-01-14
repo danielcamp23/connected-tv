@@ -1,0 +1,8 @@
+sub init()
+    m.screenLabel = m.top.findNode("screenLabel")
+end sub
+
+' Override this function in each screen
+sub onScreenLoaded()
+
+end sub

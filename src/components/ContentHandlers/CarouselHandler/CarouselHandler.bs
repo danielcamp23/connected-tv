@@ -1,0 +1,40 @@
+sub init()
+    ' Initialize this in the extended component
+    m.apiTask = createObject("roSGNode", "CarouselTask")
+    m.apiTask.observeField("state", "onTaskFinished")
+end sub
+
+sub onTaskFinished(event as object)
+    state = event.getData()
+
+    if state <> "stop" then return
+
+    content = m.apiTask.content
+    if content = invalid OR content.getChildCount() = 0
+        m.parentNode.hasNextPage = false
+    else
+        ?"content has next page", content.hasNextPage
+        m.parentNode.hasNextPage = content.hasNextPage
+        m.parentNode.currentPage = m.parentNode.currentPage + 1
+        m.parentNode.appendChildren(content.getChildren(-1, 0))
+    end if
+
+    m.parentNode.queueFields(false)
+end sub
+
+sub getNextVerticalPage(parentNode as object)
+    hasNextPage = parentNode.hasNextPage
+    currentPage = parentNode.currentPage
+
+    if NOT hasNextPage then return
+
+    parentNode.queueFields(true)
+    m.parentNode = parentNode
+
+    m.apiTask.config = {
+        "carouselType": "vertical"
+        "pageToFetch": currentPage + 1
+    }
+
+    m.apiTask.control = "RUN"
+end sub

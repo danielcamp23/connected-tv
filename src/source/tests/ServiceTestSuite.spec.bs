@@ -1,0 +1,39 @@
+import "pkg:/source/Services/HTTPService.bs"
+
+namespace Tests
+    @suite("HTTP service test")
+    class ServiceTestSuite extends CTVBaseTestSuite
+        @describe("HTTP service test")
+
+        @it("Should return invalid if an invalid url is provided")
+        function _()
+            m.assertInvalid(HTTPservice().get(invalid))
+        end function
+
+        @it("Should return invalid if a type headers type is different than an associative array")
+        function _()
+            m.assertInvalid(HTTPservice().get("http://www.google.com", "invalid"))
+        end function
+
+        @it("Should return invalid if qParams object is not an associative array")
+        function _()
+            m.assertInvalid(HTTPservice().get("http://www.google.com", {}, "invalid"))
+        end function
+
+        @it("Should* return invalid if qParams is not an associative array")
+        function _()
+            m.assertInvalid(HTTPservice()._buildQueryString(2))
+        end function
+
+        @it("Should return an empty string if qParams is an empty associative array")
+        function _()
+            m.assertEqual(HTTPservice()._buildQueryString({}), "")
+        end function
+
+        @it("Should return a valid query string if qParams is a valid associative array")
+        function _()
+            m.assertEqual(HTTPservice()._buildQueryString({a: 1, b: 2}), "a=1&b=2")
+            m.assertEqual(HTTPservice()._buildQueryString({}), "")
+        end function
+    end class
+end namespace

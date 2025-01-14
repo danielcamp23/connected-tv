@@ -1,0 +1,86 @@
+import "pkg:/source/enums/CarouselEnums.bs"
+
+sub init()
+    _bindComponents()
+    _bindObservers()
+    _initializeComponents()
+end sub
+
+sub _bindComponents()
+    m.container = m.top.findNode("container")
+    m.scrollInterpolator = m.top.findNode("scrollInterpolator")
+    m.scrollAnimation = m.top.findNode("scrollAnimation")
+end sub
+
+sub _bindObservers()
+    m.top.observeField("content", "onContentChange")
+    m.top.observeField("focusedChild", "onFocusedChildChange")
+end sub
+
+sub _initializeComponents()
+    m.focusedRow = - 1
+    m.itemSpacing = 24
+    m.container.itemSpacings = [m.itemSpacing]
+end sub
+
+sub onContentChange(event as object)
+    content = event.getData()
+
+    for each child in content.getChildren(-1, 0)
+        carouselName = child.carouselType = CarouselType.Landscape ? "LandscapeCarousel" : "PortraitCarousel"
+        carousel = m.container.createChild(carouselName)
+        carousel.translation = [0, m.container.boundingRect()["height"] + m.itemSpacing]
+        carousel.content = child
+        if NOT m.top.isInFocusChain() then m.top.setFocus(true)
+    end for
+
+end sub
+
+sub onFocusedChildChange()
+    if NOT m.top.hasFocus() then return
+
+    if m.focusedRow = - 1 then m.focusedRow = 0
+
+    row = m.container.getChild(m.focusedRow)
+    if row <> invalid then row.setFocus(true)
+end sub
+
+function onKeyEvent(key as string, press as boolean) as boolean
+    if NOT press then return false
+
+    handled = false
+
+    if key = "down"
+        if m.focusedRow < m.container.getChildCount() - 1
+            scrollContainer(false)
+            m.focusedRow = m.focusedRow + 1
+            m.container.getChild(m.focusedRow).setFocus(true)
+            m.top.focusedRow = m.focusedRow
+            handled = true
+        end if
+    else if key = "up"
+        if m.focusedRow > 0
+            scrollContainer(true)
+            m.focusedRow = m.focusedRow - 1
+            m.container.getChild(m.focusedRow).setFocus(true)
+            m.top.focusedRow = m.focusedRow
+            handled = true
+        end if
+    end if
+
+    return handled
+end function
+
+function scrollContainer(moveUp as boolean)
+    translation = invalid
+    currentRow = m.container.getChild(m.focusedRow)
+
+    if moveUp
+        translation = [0, m.container.translation[1] + currentRow.boundingRect()["height"] + m.itemSpacing]
+    else
+        translation = [0, m.container.translation[1] - currentRow.boundingRect()["height"] - m.itemSpacing]
+    end if
+
+    m.scrollInterpolator.keyValue = [m.container.translation, translation]
+    m.scrollAnimation.control = "start"
+end function

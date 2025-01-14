@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="CarouselTask" extends="Task">
+    <script type="text/brightscript" uri="CarouselTask.bs" />
+    <interface>
+        <field id="content" type="node" />
+        <field id="config" type="assocarray" />
+    </interface>
+</component>

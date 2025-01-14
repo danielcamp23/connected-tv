@@ -1,0 +1,84 @@
+import "pkg:/source/core/router.bs"
+import "pkg:/source/enums/mainMenuEnum.bs"
+
+sub init()
+    _bindElements()
+    _setObservers()
+    _applyStyle()
+
+    m.focusedElementIndex = -1
+end sub
+
+sub _bindElements()
+    m.mainContainer = m.top.findNode("mainContainer")
+    m.homeBtn = m.top.findNode("homeBtn")
+
+    m.detailsbtn = m.top.findNode("detailsbtn")
+    m.newsBtn = m.top.findNode("newsBtn")
+    m.profileBtn = m.top.findNode("profileBtn")
+end sub
+
+sub _setObservers()
+    for each btn in m.mainContainer.getChildren(-1, 0)
+        btn.observeField("buttonSelected", "onButtonSelected", ["id"])
+    end for
+
+    m.top.observeField("focusedChild", "onFocusedChild")
+end sub
+
+sub _applyStyle()
+    m.homeBtn.text = "Home"
+    m.detailsbtn.text = "Details"
+    m.newsBtn.text = "News"
+    m.profileBtn.text = "Profile"
+end sub
+
+sub onButtonSelected(event as object)
+    btn = event.getInfo()
+
+    buttonIdMap = {
+        "homeBtn": MenuItem.Home
+        "detailsbtn": MenuItem.Details
+        "newsBtn": MenuItem.News
+        "profilebtn": MenuItem.Profile
+    }
+
+    m.top.buttonSelected = buttonIdMap[btn.id]
+end sub
+
+sub onFocusedChild()
+    if m.top.hasFocus()
+        m.homeBtn.setFocus(true)
+        m.focusedElementIndex = 0
+    end if
+end sub
+
+function onKeyEvent(key as string, pressed as boolean) as boolean
+    handled = false
+
+    if not pressed then return false
+
+    if key = "left"
+        if m.focusedElementIndex > 0
+            m.focusedElementIndex--
+            m.mainContainer.getChild(m.focusedElementIndex).setFocus(true)
+        end if
+
+        handled = true
+    else if key = "right"
+        if m.focusedElementIndex < m.mainContainer.getChildCount() - 1
+            m.focusedElementIndex++
+            m.mainContainer.getChild(m.focusedElementIndex).setFocus(true)
+        end if
+
+        handled = true
+    else if key = "up"
+        handled = true
+    else if key = "back"
+        ' nothing to do here
+    else
+        handled = true
+    end if
+
+    return handled
+end function

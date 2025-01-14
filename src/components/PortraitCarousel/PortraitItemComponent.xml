@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="PortraitItemComponent" extends="Group">
+    <script type="text/brightscript" uri="PortraitItemComponent.bs" />
+    <interface>
+        <field id="itemContent" type="node" onChange="onItemContentChange" />
+        <field id="index"       type="int" />
+        <field id="groupHasFocus" type="boolean" />
+        <field id="currTarget"  type="float"  />
+        <field id="currRect"    type="rect2d" />
+        <field id="focusPercent" type="float"  />
+        <field id="itemHasFocus" type="boolean" />
+    </interface>
+    <children>
+        <Poster id="poster"
+            translation="[0, 0]"
+            width="180"
+            height="120"/>
+
+        <Label id="title"
+            translation="[0, 130]"
+            width="60"
+            height="3" />
+
+        <Label id="description"
+            translation="[0, 140]"
+            width="60"
+            height="9" />
+
+        <Poster id="itemFocusFrame"
+            uri="pkg:/images/item-focus.9.png"
+            translation="[-3, -3]"
+            visible="false"
+            width="60"
+            height="60" />
+    </children>
+
+</component>

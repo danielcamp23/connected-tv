@@ -1,0 +1,14 @@
+import "./HTTPService.bs"
+
+function ContentService()
+    return {
+        httpService: HttpService()
+
+        getContent: function(pageId as string) as object
+            url = `https://jsonplaceholder.typicode.com/albums/${pageId}/photos`
+            ?"url is ", url
+            return m.httpService.get(url)
+        end function
+    }
+
+end function

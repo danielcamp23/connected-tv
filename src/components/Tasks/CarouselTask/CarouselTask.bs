@@ -1,0 +1,57 @@
+import "pkg:/source/services/ContentService.bs"
+import "pkg:/source/enums/CarouselEnums.bs"
+
+sub init()
+    m.top.functionName = "runTask"
+end sub
+
+sub runTask()
+    config = m.top.config
+    pageToFetch = config.pageToFetch
+
+    carouseselService = ContentService()
+    carouselData = carouseselService.getContent(pageToFetch.toStr())
+
+    if carouselData <> invalid
+        ?"carouselData is "; carouselData.responseBody.count()
+    else
+        ?"carousel data is invalid"
+    end if
+
+    c = getContentNode(carouselData.responseBody)
+    m.top.content = c
+end sub
+
+function getContentNode(response as object) as object
+    contentNode = createObject("roSGNode", "ContentNode")
+    contentNode.addFields({hasNextPage: true})
+
+    ' Creating 10 rows of 15 items each
+    for i = 0 to 150
+        row = invalid
+
+        if i MOD 15 = 0
+            row = contentNode.createChild("CarouselModel")
+            rowNumber = contentNode.getChildCount()
+            row.title = `Carousel ${rowNumber}`
+            row.carouselType = rowNumber MOD 4 = 0 ? CarouselType.Portrait : CarouselType.Landscape
+        else
+            row = contentNode.getChild(contentNode.getChildCount() - 1)
+        end if
+
+        item = row.createChild("CarouselItemModel")
+        if item <> invalid AND response[i] <> invalid
+            item.update({
+                title: "card " + i.toStr()' response[i].title
+                description: "description " + i.toStr()' response[i].description
+                thumbnailUrl: response[i].thumbnailUrl
+                heroUrl: response[i].url
+            })
+        else
+            exit for
+        end if
+
+    end for
+
+    return contentNode
+end function

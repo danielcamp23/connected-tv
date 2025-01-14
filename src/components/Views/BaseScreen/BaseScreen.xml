@@ -1,0 +1,19 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+<component name="BaseScreen" extends="Group">
+    <script type="text/brightscript" uri="BaseScreen.bs" />
+    <interface>
+        <field id="isLoaded" type="boolean" onChange="onScreenLoaded"/>
+    </interface>
+    <children>
+        <Rectangle
+            width="1920"
+            height="1080"
+            color="#333333" />
+    
+        <Label id="screenLabel"
+            width="300"
+            height="24"
+            translation="[300, 300]" />
+    </children>
+    
+</component>

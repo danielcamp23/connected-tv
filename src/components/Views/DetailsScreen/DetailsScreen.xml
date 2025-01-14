@@ -1,0 +1,25 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+<component name="DetailsScreen" extends="BaseScreen">
+    <script type="text/brightscript" uri="DetailsScreen.bs" />
+    <children>
+        <video id="videoNode"/>
+        <CarouselGroup id="carouselGroup"
+            translation="[0, 300]"
+            clippingRect="[0, 0, 1920, 1080]"  /> <!-- x, y, width, height -->
+
+
+        <FontLabel id="title"
+            translation="[50, 240]"
+            width="60"
+            height="3"
+            fontUri="pkg:/fonts/SofiaSans-Regular.ttf"
+            fontSize="15"
+            text="hola" />
+
+        <Button id="someButton"
+            translation="[50, 240]"
+            text="Some Button" />
+
+
+    </children>
+</component>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="CarouselCollectionModel" extends="ContentNode">
+    <interface>
+        <field id="hasNextPage" type="boolean" value="true" />
+        <field id="currentPage" type="integer" value="0" />
+    </interface>
+</component>

@@ -1,0 +1,21 @@
+{
+  "name": "connected-tv",
+  "version": "1.0.0",
+  "description": "Roku app using Brighterscript and Rooibos",
+  "main": "index.js",
+  "scripts": {
+    "build": "",
+    "generate-code": "npx bsc",
+    "build-test": "npx bsc --project ./bsconfig-test.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "brighterscript-formatter": "^1.6.40",
+    "rooibos-roku": "^5.11.0"
+  },
+  "dependencies": {
+    "@rokucommunity/bslint": "^0.8.17",
+    "brighterscript": "^0.65.22"
+  }
+}

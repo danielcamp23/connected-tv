@@ -1,0 +1,26 @@
+{
+    "rootDir": "src",
+    "stagingDir": "dist",
+    "retainStagingDir": true,
+    //this flag tells BrighterScript that for every xml file, try to import a .bs file with the same name and location
+    "autoImportComponentScript": true,
+    "sourceMap": true,
+    "files": [
+        "source/**/*",
+        "components/**/*",
+        "images/**/*",
+        "manifest"
+    ],
+    "plugins": [
+        "rooibos-roku"
+    ],
+    "rooibos": {
+        "isRecordingCodeCoverage": false,
+        "printTestTimes": true,
+        "testsFilePattern": null,
+        "tags": ["!integration", "!deprecated", "!fixme"],
+        "showOnlyFailures": true,
+        "catchCrashes": true,
+        "lineWidth": 70
+      }
+}

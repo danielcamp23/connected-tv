@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="CarouselModel" extends="ContentNode">
+    <interface>
+        <field id="carouselType" type="integer" />
+    </interface>
+</component>

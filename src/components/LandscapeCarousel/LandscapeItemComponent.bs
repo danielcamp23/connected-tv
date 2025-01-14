@@ -1,0 +1,35 @@
+sub init()
+    _bindComponents()
+    _bindObservers()
+end sub
+
+sub _bindComponents()
+    m.poster = m.top.findNode("poster")
+    m.itemFocusFrame = m.top.findNode("itemFocusFrame")
+    m.title = m.top.findNode("title")
+    m.description = m.top.findNode("description")
+end sub
+
+sub _bindObservers()
+    m.top.observeField("currRect", "onCurrRectChange")
+    m.top.observeField("itemHasFocus", "onItemHasFocus")
+end sub
+
+sub onItemContentChange(event as object)
+    content = event.getData()
+
+    m.poster.uri = content.thumbnailUrl
+    m.title.text = content.title
+    m.description.text = content.description
+end sub
+
+sub onCurrRectChange()
+    m.poster.width = m.top.currRect.width
+    m.poster.height = m.top.currRect.height
+    m.itemFocusFrame.width = m.top.currRect.width + 6
+    m.itemFocusFrame.height = m.top.currRect.height + 40
+end sub
+
+sub onItemHasFocus()
+    m.itemFocusFrame.visible = m.top.itemHasFocus
+end sub

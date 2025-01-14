@@ -1,0 +1,20 @@
+namespace Tests
+    @ignore
+    @suite("Test for the main scene")
+    class MainSceneTest extends CTVBaseTestSuite
+
+        @describe("Main Scene tests")
+
+        @it("first test")
+        function _()
+            personName = "Daniel"
+            m.assertEqual(personName, "Daniel")
+        end function
+
+        @it("second test")
+        function _()
+            personName = "Daniel"
+            m.assertEqual(personName, "Danielo")
+        end function
+    end class
+end namespace

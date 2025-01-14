@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="BaseCarousel" extends="Group">
+    <script type="text/brightscript" uri="BaseCarousel.bs" />
+    <interface>
+        <field id="content" type="node" onChange="onContentChange" />
+    </interface>
+    <children>
+        <FontLabel id="title"
+            width="150"
+            fontUri="pkg:/fonts/SofiaSans-Regular.ttf"
+            fontSize="15" />
+
+        <TargetList id="targetList"
+            translation="[20, 20]"
+            advanceKey="right"
+            reverseKey="left" />
+    </children>
+
+</component>

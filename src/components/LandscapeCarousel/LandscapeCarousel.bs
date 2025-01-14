@@ -1,0 +1,94 @@
+sub init()
+    _bindComponents()
+    _bindObservers()
+    _initilizeComponents()
+end sub
+
+sub _initilizeComponents()
+    w = 180
+    h = 120
+    s = 15
+
+    focusedTargetSet1 = createObject("roSGNode", "TargetSet")
+    focusedTargetSet1.focusIndex = 1
+    focusedTargetSet1.targetRects = [
+        {x: w * (0 + 0) + s * (0 + 0), y: 0, width: w, height: h}
+        {x: w * (0 + 1) + s * (0 + 1) - 5, y: -5, width: w + 10, height: h + 10}
+        {x: w * (0 + 2) + s * (0 + 2), y: 0, width: w, height: h}
+        {x: w * (0 + 3) + s * (0 + 3), y: 0, width: w, height: h}
+        {x: w * (0 + 4) + s * (0 + 4), y: 0, width: w, height: h}
+        {x: w * (0 + 5) + s * (0 + 5), y: 0, width: w, height: h}
+        {x: w * (0 + 6) + s * (0 + 6), y: 0, width: w, height: h}
+        {x: w * (0 + 7) + s * (0 + 7), y: 0, width: w, height: h}
+    ]
+
+    focusedTargetSet2 = createObject("roSGNode", "TargetSet")
+    focusedTargetSet2.focusIndex = 2
+    focusedTargetSet2.targetRects = [
+        {x: w * (0 + 0) + s * (0 + 0), y: 0, width: w, height: h}
+        {x: w * (0 + 1) + s * (0 + 1), y: 0, width: w, height: h }
+        {x: w * (0 + 2) + s * (0 + 2) - 5, y: -5, width: w + 10, height: h + 10}
+        {x: w * (0 + 3) + s * (0 + 3), y: 0, width: w, height: h}
+        {x: w * (0 + 4) + s * (0 + 4), y: 0, width: w, height: h}
+        {x: w * (0 + 5) + s * (0 + 5), y: 0, width: w, height: h}
+        {x: w * (0 + 6) + s * (0 + 6), y: 0, width: w, height: h}
+        {x: w * (0 + 7) + s * (0 + 7), y: 0, width: w, height: h}
+    ]
+
+    focusedTargetSet3 = createObject("roSGNode", "TargetSet")
+    focusedTargetSet3.focusIndex = 3
+    focusedTargetSet3.targetRects = [
+        {x: w * (0 + 0) + s * (0 + 0), y: 0, width: w, height: h}
+        {x: w * (0 + 1) + s * (0 + 1), y: 0, width: w, height: h }
+        {x: w * (0 + 2) + s * (0 + 2), y: 0, width: w, height: h }
+        {x: w * (0 + 3) + s * (0 + 3) - 5, y: -5, width: w + 10, height: h + 10}
+        {x: w * (0 + 4) + s * (0 + 4), y: 0, width: w, height: h}
+        {x: w * (0 + 5) + s * (0 + 5), y: 0, width: w, height: h}
+        {x: w * (0 + 6) + s * (0 + 6), y: 0, width: w, height: h}
+        {x: w * (0 + 7) + s * (0 + 7), y: 0, width: w, height: h}
+    ]
+
+    focusedTargetSet4 = createObject("roSGNode", "TargetSet")
+    focusedTargetSet4.focusIndex = 4
+    focusedTargetSet4.targetRects = [
+        {x: w * (0 + 0) + s * (0 + 0), y: 0, width: w, height: h}
+        {x: w * (0 + 1) + s * (0 + 1), y: 0, width: w, height: h }
+        {x: w * (0 + 2) + s * (0 + 2), y: 0, width: w, height: h }
+        {x: w * (0 + 3) + s * (0 + 3) - 5, y: -5, width: w + 10, height: h + 10}
+        {x: w * (0 + 4) + s * (0 + 4), y: 0, width: w, height: h}
+        {x: w * (0 + 5) + s * (0 + 5), y: 0, width: w, height: h}
+        {x: w * (0 + 6) + s * (0 + 6), y: 0, width: w, height: h}
+        {x: w * (0 + 7) + s * (0 + 7), y: 0, width: w, height: h}
+    ]
+
+    focusedTargetSet5 = createObject("roSGNode", "TargetSet")
+    focusedTargetSet5.focusIndex = 5
+    focusedTargetSet5.targetRects = [
+        {x: w * (0 + 0) + s * (0 + 0), y: 0, width: w, height: h}
+        {x: w * (0 + 1) + s * (0 + 1), y: 0, width: w, height: h }
+        {x: w * (0 + 2) + s * (0 + 2), y: 0, width: w, height: h }
+        {x: w * (0 + 3) + s * (0 + 3) - 5, y: -5, width: w + 10, height: h + 10}
+        {x: w * (0 + 4) + s * (0 + 4), y: 0, width: w, height: h}
+        {x: w * (0 + 5) + s * (0 + 5), y: 0, width: w, height: h}
+        {x: w * (0 + 6) + s * (0 + 6), y: 0, width: w, height: h}
+        {x: w * (0 + 7) + s * (0 + 7), y: 0, width: w, height: h}
+    ]
+
+    unfocusedTargetSet = createObject("roSGNode", "TargetSet")
+    unfocusedTargetSet.targetRects = [
+        {x: w * (0 + 0) + s * (0 + 0), y: 0, width: w, height: h}
+        {x: w * (0 + 1) + s * (0 + 1), y: 0, width: w, height: h}
+        {x: w * (0 + 2) + s * (0 + 2), y: 0, width: w, height: h}
+        {x: w * (0 + 3) + s * (0 + 3), y: 0, width: w, height: h}
+        {x: w * (0 + 4) + s * (0 + 4), y: 0, width: w, height: h}
+        {x: w * (0 + 5) + s * (0 + 5), y: 0, width: w, height: h}
+        {x: w * (0 + 6) + s * (0 + 6), y: 0, width: w, height: h}
+        {x: w * (0 + 7) + s * (0 + 7), y: 0, width: w, height: h}
+    ]
+
+    m.targetList.itemComponentName = "LandscapeItemComponent"
+    m.targetList.focusedTargetSet = [focusedTargetSet1, focusedTargetSet2, focusedTargetSet3, focusedTargetSet4, focusedTargetSet5]
+    m.targetList.unfocusedTargetSet = unfocusedTargetSet
+    m.targetList.targetSet = focusedTargetSet1
+    m.targetList.showTargetRects = true
+end sub

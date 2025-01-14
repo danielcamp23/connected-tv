@@ -1,0 +1,4 @@
+enum CarouselType
+    Landscape
+    Portrait
+end enum

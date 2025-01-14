@@ -1,0 +1,7 @@
+namespace Tests
+    class CTVBaseTestSuite extends rooibos.BaseTestSuite
+        protected override function setup()
+            ?"This is the setup method"
+        end function
+    end class
+end namespace

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="CarouselGroup" extends="Group">
+    <script type="text/brightscript" uri="CarouselGroup.bs" />
+    <interface>
+        <field id="content" type="node" />
+        <field id="focusedRow" type="integer" />
+    </interface>
+    <children>
+        <Group id="container"
+            layoutDirection="vert"
+            itemSpacings="[24]" />
+
+        <Animation id="scrollAnimation"
+            duration="0.5" >
+            <Vector2DFieldInterpolator
+                id="scrollInterpolator"
+                key="[0, 1]"
+                fieldToInterp="container.translation" />
+        </Animation>
+    </children>
+</component>

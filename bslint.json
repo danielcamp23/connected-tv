@@ -1,0 +1,9 @@
+{
+    "rules": {
+        "aa-comma-style": "never",
+        "named-function-style": "off",
+        "anon-function-style": "off"
+    },
+    "globals": [],
+    "ignores": []
+}

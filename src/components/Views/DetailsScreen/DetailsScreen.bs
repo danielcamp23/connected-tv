@@ -1,0 +1,89 @@
+sub init()
+    m.screenLabel = m.top.findNode("screenLabel")
+    m.screenLabel.text = "Details Screen"
+
+    m.videoNode = m.top.findNode("videoNode")
+    ' startVideo()
+    _bindComponents()
+    _bindObservers()
+    _initializeComponents()
+    ' _initializeComponents2()
+end sub
+
+sub _bindComponents()
+
+    m.carouselGroup = m.top.findNode("carouselGroup")
+end sub
+
+sub _bindObservers()
+    m.carouselGroup.observeField("focusedRow", "onFocusedRowChange")
+end sub
+
+sub _initializeComponents()
+    m.modelHandler = createObject("roSGNode", "CarouselHandler")
+end sub
+
+sub startVideo()
+    videoContentNode = createObject("roSGNode", "Contentnode")
+    videoContentNode.streamFormat = "hls"
+    videoContentNode.url = "https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8"
+
+    m.videoNode.content = videoContentNode
+    m.videoNode.control = "play"
+
+end sub
+
+sub onScreenLoaded()
+    if not m.top.isLoaded then return
+
+    ' m.videoNode.setFocus(true)
+
+    ' m.modelHandler.callFunc("getVerticalPageData", { "page": "details" })
+    ' m.carouselTask = createObject("roSGNode", "CarouselTask")
+    ' m.carouselTask.observeField("content", "onContentChange")
+    ' m.carouselTask.control = "RUN"
+    getNextVerticalPage()
+end sub
+
+function getNextVerticalPage()
+    if m.contenNode = invalid then m.contenNode = createObject("roSGNode", "CarouselCollectionModel")
+    m.carouselGroup.content = m.contenNode
+
+    m.modelHandler@.getNextVerticalPage(m.contenNode)
+end function
+
+function getNextHorizontalPage()
+
+end function
+
+sub onContentChange(event as object)
+    content = event.getData()
+    m.carouselGroup.content = content
+
+    m.carouselGroup.setFocus(true)
+end sub
+
+sub onFocusedRowChange(event as object)
+    focusedRow = event.getData()
+    if focusedRow = invalid then return
+
+    if focusedRow >= m.contenNode.getChildCount() - 2 AND m.contenNode.hasNextPage
+        getNextVerticalPage()
+    end if
+end sub
+
+sub onKeyEvent(key as string, press as boolean) as boolean
+    handled = false
+    if NOT press then return false
+
+    if key = "down"
+        if NOT m.carouselGroup.hasFocus() then m.carouselGroup.setFocus(true)
+
+        handled = true
+    else if key = "up"
+   
+        ' handled = true
+    end if
+
+    return handled
+end sub

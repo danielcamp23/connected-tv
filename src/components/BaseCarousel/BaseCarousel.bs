@@ -1,0 +1,27 @@
+sub init()
+end sub
+
+sub _bindComponents()
+    m.title = m.top.findNode("title")
+    m.targetList = m.top.findNode("targetList")
+end sub
+
+sub _bindObservers()
+    m.top.observeField("currRect", "onCurrRectChange")
+    m.top.observeField("itemHasFocus", "onItemHasFocus")
+    m.top.observeField("focusedChild", "onFocusedChildChange")
+end sub
+
+sub onContentChange(event as object)
+    content = event.getData()
+    if content = invalid then return
+
+    m.targetList.content = m.top.content
+    m.title.text = content.title
+end sub
+
+sub onFocusedChildChange()
+    if NOT m.top.hasFocus() then return
+
+    m.targetList.setFocus(true)
+end sub

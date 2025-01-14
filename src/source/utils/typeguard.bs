@@ -1,0 +1,17 @@
+namespace Typeguard
+    function isString(value as object) as boolean
+        return type(value) = "roString"
+    end function
+
+    function isStringAndNotEmpty(value as object) as boolean
+        return isString(value) and value.trim() <> ""
+    end function
+
+    function isAssociativeArray(value as object) as boolean
+        return type(value) = "roAssociativeArray"
+    end function
+
+    function implementsInterface(value as object, interfaceName as string) as boolean
+        return getInterface(value, interfaceName) <> invalid
+    end function
+end namespace

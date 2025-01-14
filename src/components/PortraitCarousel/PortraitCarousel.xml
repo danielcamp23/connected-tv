@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="PortraitCarousel" extends="BaseCarousel">
+    <script type="text/brightscript" uri="PortraitCarousel.bs" />
+    <interface>
+
+    </interface>
+    <children>
+
+    </children>
+
+</component>

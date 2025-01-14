@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="CarouselHandler" extends="Group">
+    <script type="text/brightscript" uri="CarouselHandler.bs" />
+    <interface>
+        <function name="getNextVerticalPage" />
+    </interface>
+</component>

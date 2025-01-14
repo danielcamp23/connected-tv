@@ -1,0 +1,6 @@
+enum MenuItem
+    Home = "Home"
+    Details = "Details"
+    News = "News"
+    Profile = "Profile"
+end enum

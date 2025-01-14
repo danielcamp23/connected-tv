@@ -1,0 +1,62 @@
+import "pkg:/source/enums/mainMenuEnum.bs"
+
+sub initRouter(screenStackNode as object, menuNode as object)
+    m.router = new Router(screenStackNode)
+    m.router.goToMainScreen()
+
+    menuNode.observeFieldScoped("buttonSelected", "onMenuItemselected")
+end sub
+
+sub onMenuItemselected(event as object)
+    buttonSelected = event.getData()
+
+    ?"Button selected: "buttonSelected
+    m.router.goToSection(buttonSelected)
+end sub
+
+' -------------------------
+class Router
+    private sgNode as object
+
+    private stack as object
+
+    sub new(sgNode as object)
+        m.sgNode = sgNode
+        m.stack = []
+    end sub
+
+    ' @return void
+    ' @description Navigates to the main screen
+    ' @example
+    sub goToMainScreen()
+        m.goToSection(MenuItem.Home)
+    end sub
+
+    sub goToSection(section as string)
+        newScreenName = invalid
+
+        if section = MenuItem.Home
+            newScreenName = "HomeScreen"
+        else if section = MenuItem.Details
+            newScreenName = "DetailsScreen"
+        end if
+
+        if newScreenName <> invalid
+            screen = createObject("roSGNode", newScreenName)
+            m.sgNode.appendChild(screen)
+            m.stack.push(screen)
+
+            screen.isLoaded = true
+        end if
+    end sub
+
+    function goBackToPreviousSection() as boolean
+        if m.stack.count() = 0 then return false
+
+        screenToRemove = m.stack.pop()
+        m.sgNode.removeChild(screenToRemove)
+
+        return true
+    end function
+end class
+

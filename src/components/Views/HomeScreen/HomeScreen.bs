@@ -1,0 +1,20 @@
+sub init()
+    m.screenLabel = m.top.findNode("screenLabel")
+    m.screenLabel.text = "Home Screen"
+end sub
+
+sub onKeyEvent(key as string, press as boolean) as boolean
+    handled = false
+    if NOT press then return false
+
+    if key = "down"
+        if NOT m.carouselGroup.hasFocus() then m.carouselGroup.setFocus(true)
+
+        handled = true
+    else if key = "up"
+   
+        handled = false
+    end if
+
+    return handled
+end sub
